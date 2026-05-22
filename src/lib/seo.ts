@@ -16,6 +16,11 @@ export const constructMetadata = ({
   return {
     title: title ? `${title} | Tech Review Hub` : baseTitle,
     description: description || baseDescription,
+    verification: {
+      other: {
+        "impact-site-verification": "114a8e52-42af-4917-94a1-35eb911ed5f9",
+      },
+    },
     openGraph: {
       title: title ? `${title} | Tech Review Hub` : baseTitle,
       description: description || baseDescription,
