@@ -1,8 +1,12 @@
-import { reviews, comparisons, categories, buyingGuides } from '@/lib/data';
+import { getReviews, getComparisons, categories, getBuyingGuides } from '@/lib/data';
 import type { MetadataRoute } from 'next';
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://techreviewhub.com';
+
+  const reviews = await getReviews();
+  const comparisons = await getComparisons();
+  const buyingGuides = await getBuyingGuides();
 
   const staticPages = [
     { url: baseUrl, lastModified: new Date(), changeFrequency: 'daily' as const, priority: 1.0 },

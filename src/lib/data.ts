@@ -1,4 +1,5 @@
 import { BuyingGuide, Category, Comparison, Deal, Review, TrendingItem } from "./types";
+import { getPublishedPosts, NotionPost, getPageContent } from "./notion";
 
 export const categories: Category[] = [
   { id: "ai-gadgets", name: "AI Gadgets", description: "Latest AI-powered gadgets and smart devices", image: "https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=futuristic%20AI%20gadget%20smart%20device%20white%20background&image_size=landscape_16_9", articleCount: 24 },
@@ -7,7 +8,7 @@ export const categories: Category[] = [
   { id: "laser-engravers", name: "Laser Engravers", description: "Laser cutters and engraving machines", image: "https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=laser%20engraver%20machine%20cutting%20wood&image_size=landscape_16_9", articleCount: 12 },
 ];
 
-export const reviews: Review[] = [
+const fallbackReviews: Review[] = [
   {
     slug: "best-ai-gadget-2025",
     title: "The Best AI Gadget of 2025: A Comprehensive Review",
@@ -128,7 +129,7 @@ export const reviews: Review[] = [
   },
 ];
 
-export const comparisons: Comparison[] = [
+const fallbackComparisons: Comparison[] = [
   {
     slug: "ai-gadget-vs-competitor",
     title: "Top AI Gadget 2025 vs Competitor: Which Should You Buy?",
@@ -157,12 +158,142 @@ export const comparisons: Comparison[] = [
   },
 ];
 
-export const buyingGuides: BuyingGuide[] = [
+const fallbackBuyingGuides: BuyingGuide[] = [
   { slug: "best-ai-gadgets-2025", title: "Best AI Gadgets 2025", excerpt: "Our curated list of the best AI gadgets you can buy right now.", category: "ai-gadgets", date: "2025-05-14", image: "https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=collection%20of%20AI%20smart%20gadgets&image_size=landscape_16_9", productCount: 8, readingTime: 15 },
   { slug: "best-mini-pcs-2025", title: "Best Mini PCs 2025", excerpt: "Compact powerhouses for every budget and need.", category: "mini-pcs", date: "2025-05-10", image: "https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=collection%20of%20mini%20PCs&image_size=landscape_16_9", productCount: 6, readingTime: 12 },
   { slug: "best-laser-engravers-2025", title: "Best Laser Engravers 2025", excerpt: "From beginner to pro, the best laser engravers for every skill level.", category: "laser-engravers", date: "2025-05-06", image: "https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=collection%20of%20laser%20engravers&image_size=landscape_16_9", productCount: 5, readingTime: 10 },
   { slug: "best-creator-tools-2025", title: "Best Creator Tools 2025", excerpt: "Level up your content with the best creator tools available.", category: "creator-tools", date: "2025-05-02", image: "https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=collection%20of%20creator%20tools%20gear&image_size=landscape_16_9", productCount: 10, readingTime: 14 },
 ];
+
+const categorySlugMap: Record<string, string> = {
+  "AI Gadgets": "ai-gadgets",
+  "Creator Tools": "creator-tools",
+  "Mini PCs": "mini-pcs",
+  "Laser Engravers": "laser-engravers",
+};
+
+function notionPostToReview(post: NotionPost): Review {
+  const catSlug = categorySlugMap[post.category] || post.category.toLowerCase().replace(/\s+/g, "-");
+  return {
+    slug: post.slug,
+    title: post.title,
+    excerpt: post.excerpt,
+    content: post.content || `<p>${post.excerpt}</p>`,
+    category: catSlug,
+    tags: post.tags,
+    author: post.author,
+    date: post.date,
+    image: `https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=${encodeURIComponent(post.title)}&image_size=landscape_16_9`,
+    rating: post.rating ? post.rating / 2 : 0,
+    pros: post.pros,
+    cons: post.cons,
+    faq: post.faq,
+    relatedPosts: [],
+    affiliateLink: post.affiliateLink || undefined,
+    readingTime: post.readingTime || undefined,
+    featured: post.featured,
+  };
+}
+
+function notionPostToComparison(post: NotionPost): Comparison {
+  const catSlug = categorySlugMap[post.category] || post.category.toLowerCase().replace(/\s+/g, "-");
+  return {
+    slug: post.slug,
+    title: post.title,
+    excerpt: post.excerpt,
+    category: catSlug,
+    date: post.date,
+    image: `https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=${encodeURIComponent(post.title)}&image_size=landscape_16_9`,
+    readingTime: post.readingTime || undefined,
+    products: [],
+  };
+}
+
+function notionPostToBuyingGuide(post: NotionPost): BuyingGuide {
+  const catSlug = categorySlugMap[post.category] || post.category.toLowerCase().replace(/\s+/g, "-");
+  return {
+    slug: post.slug,
+    title: post.title,
+    excerpt: post.excerpt,
+    category: catSlug,
+    date: post.date,
+    image: `https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=${encodeURIComponent(post.title)}&image_size=landscape_16_9`,
+    productCount: 1,
+    readingTime: post.readingTime || undefined,
+  };
+}
+
+let cachedPosts: NotionPost[] | null = null;
+
+async function getNotionPosts(): Promise<NotionPost[]> {
+  if (cachedPosts) return cachedPosts;
+  try {
+    const posts = await getPublishedPosts();
+    if (posts.length > 0) {
+      cachedPosts = posts;
+      return posts;
+    }
+  } catch (e) {
+    console.error("Failed to fetch from Notion:", e);
+  }
+  return [];
+}
+
+export function clearCache() {
+  cachedPosts = null;
+}
+
+export async function getReviews(): Promise<Review[]> {
+  const posts = await getNotionPosts();
+  if (posts.length > 0) {
+    const reviewPosts = posts.filter((p) => p.type === "Review");
+    if (reviewPosts.length > 0) {
+      return reviewPosts.map(notionPostToReview);
+    }
+  }
+  return fallbackReviews;
+}
+
+export async function getComparisons(): Promise<Comparison[]> {
+  const posts = await getNotionPosts();
+  if (posts.length > 0) {
+    const comparisonPosts = posts.filter((p) => p.type === "Comparison");
+    if (comparisonPosts.length > 0) {
+      return comparisonPosts.map(notionPostToComparison);
+    }
+  }
+  return fallbackComparisons;
+}
+
+export async function getBuyingGuides(): Promise<BuyingGuide[]> {
+  const posts = await getNotionPosts();
+  if (posts.length > 0) {
+    const guidePosts = posts.filter((p) => p.type === "Buying Guide");
+    if (guidePosts.length > 0) {
+      return guidePosts.map(notionPostToBuyingGuide);
+    }
+  }
+  return fallbackBuyingGuides;
+}
+
+export async function getReviewBySlug(slug: string): Promise<Review | undefined> {
+  const reviews = await getReviews();
+  return reviews.find((r) => r.slug === slug);
+}
+
+export async function getComparisonBySlug(slug: string): Promise<Comparison | undefined> {
+  const comparisons = await getComparisons();
+  return comparisons.find((c) => c.slug === slug);
+}
+
+export async function getBuyingGuideBySlug(slug: string): Promise<BuyingGuide | undefined> {
+  const guides = await getBuyingGuides();
+  return guides.find((g) => g.slug === slug);
+}
+
+export async function getPostContent(pageId: string): Promise<string> {
+  return getPageContent(pageId);
+}
 
 export const trendingItems: TrendingItem[] = [
   { slug: "best-ai-gadget-2025", title: "The Best AI Gadget of 2025", category: "ai-gadgets", views: "24.5K" },

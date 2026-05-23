@@ -1,4 +1,4 @@
-import { comparisons, reviews } from "@/lib/data";
+import { getComparisons, getReviews } from "@/lib/data";
 import { notFound } from "next/navigation";
 import { Star, CheckCircle2, XCircle, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -13,6 +13,7 @@ interface Props {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
+  const comparisons = await getComparisons();
   const comparison = comparisons.find((c) => c.slug === slug);
   return constructMetadata({
     title: comparison?.title,
@@ -24,12 +25,14 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function ComparisonPage({ params }: Props) {
   const { slug } = await params;
+  const comparisons = await getComparisons();
   const comparison = comparisons.find((c) => c.slug === slug);
 
   if (!comparison) {
     notFound();
   }
 
+  const reviews = await getReviews();
   const relatedReviews = reviews.filter((r) => r.category === comparison.category);
 
   return (

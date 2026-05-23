@@ -1,4 +1,4 @@
-import { reviews, categories } from "@/lib/data";
+import { getReviews, categories } from "@/lib/data";
 import { notFound } from "next/navigation";
 import { Star, CheckCircle2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -28,6 +28,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function BestOfPage({ params }: Props) {
   const { slug } = await params;
   const category = categories.find((c) => c.id === slug);
+  const reviews = await getReviews();
   const categoryReviews = reviews.filter((r) => r.category === slug).sort((a, b) => b.rating - a.rating);
 
   if (!category) {

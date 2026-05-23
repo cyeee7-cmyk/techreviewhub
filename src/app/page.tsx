@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { ArrowRight, Star, Zap, TrendingUp, Scale, BookOpen, Flame } from 'lucide-react';
-import { reviews, comparisons, buyingGuides, categories, trendingItems, categoryNameMap, deals } from '@/lib/data';
+import { getReviews, getComparisons, getBuyingGuides, categories, trendingItems, categoryNameMap, deals } from '@/lib/data';
 import HeroSection from '@/components/sections/HeroSection';
 import LeaderboardBanner from '@/components/sections/LeaderboardBanner';
 import InlineAd from '@/components/sections/InlineAd';
@@ -14,7 +14,10 @@ import ComparisonCard from '@/components/sections/ComparisonCard';
 import GuideCard from '@/components/sections/GuideCard';
 import DealCard from '@/components/sections/DealCard';
 
-export default function Home() {
+export default async function Home() {
+  const reviews = await getReviews();
+  const comparisons = await getComparisons();
+  const buyingGuides = await getBuyingGuides();
   const featuredReviews = reviews.filter((r) => r.featured).slice(0, 3);
   const latestReviews = reviews.slice(0, 6);
   const aiGadgets = reviews.filter((r) => r.category === 'ai-gadgets');

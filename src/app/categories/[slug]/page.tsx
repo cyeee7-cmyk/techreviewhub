@@ -1,4 +1,4 @@
-import { categories, reviews } from "@/lib/data";
+import { categories, getReviews } from "@/lib/data";
 import ReviewCard from "@/components/sections/ReviewCard";
 import { notFound } from "next/navigation";
 import { constructMetadata } from "@/lib/seo";
@@ -20,6 +20,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function CategoryPage({ params }: Props) {
   const { slug } = await params;
   const category = categories.find((c) => c.id === slug);
+  const reviews = await getReviews();
   const categoryReviews = reviews.filter((r) => r.category === slug);
 
   if (!category) {

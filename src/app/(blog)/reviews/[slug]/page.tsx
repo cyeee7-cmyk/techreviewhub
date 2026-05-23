@@ -1,4 +1,4 @@
-import { reviews } from "@/lib/data";
+import { getReviews } from "@/lib/data";
 import { notFound } from "next/navigation";
 import { Star, CheckCircle2, XCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -13,6 +13,7 @@ interface Props {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
+  const reviews = await getReviews();
   const review = reviews.find((r) => r.slug === slug);
   return constructMetadata({
     title: review?.title,
@@ -24,6 +25,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function ReviewPage({ params }: Props) {
   const { slug } = await params;
+  const reviews = await getReviews();
   const review = reviews.find((r) => r.slug === slug);
 
   if (!review) {

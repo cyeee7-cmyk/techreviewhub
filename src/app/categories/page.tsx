@@ -1,4 +1,4 @@
-import { categories, reviews } from "@/lib/data";
+import { categories, getReviews } from "@/lib/data";
 import ReviewCard from "@/components/sections/ReviewCard";
 import Link from "next/link";
 import { constructMetadata } from "@/lib/seo";
@@ -9,7 +9,8 @@ export const metadata: Metadata = constructMetadata({
   description: "Browse all tech review categories on TechReviewHub",
 });
 
-export default function CategoriesPage() {
+export default async function CategoriesPage() {
+  const reviews = await getReviews();
   return (
     <div className="py-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
