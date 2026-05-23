@@ -51,7 +51,7 @@ export default async function Home() {
               </div>
             </section>
 
-            <InlineAd />
+            <InlineAd variant="deal" />
 
             <section className="mb-12">
               <div className="flex items-center justify-between mb-6">
@@ -104,7 +104,7 @@ export default async function Home() {
               </div>
             </section>
 
-            <InlineAd />
+            <InlineAd variant="guide" />
 
             <section className="mb-12">
               <div className="flex items-center justify-between mb-6">
@@ -171,11 +171,11 @@ export default async function Home() {
             <div className="sticky top-[120px] space-y-6">
               <SearchBox />
               <TrendingSidebar items={trendingItems} />
-              <AdPlaceholder width="300" height="250" label="Ad Space — 300×250" />
+              <AdPlaceholder width="300" height="250" variant="product" />
               <PopularComparisons comparisons={comparisons} />
-              <AdPlaceholder width="300" height="600" label="Ad Space — 300×600" />
+              <AdPlaceholder width="300" height="600" variant="deal" />
               <NewsletterWidget />
-              <AdPlaceholder width="300" height="250" label="Ad Space — 300×250" />
+              <AdPlaceholder width="300" height="250" variant="newsletter" />
             </div>
           </aside>
         </div>
