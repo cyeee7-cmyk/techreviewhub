@@ -172,6 +172,13 @@ const categorySlugMap: Record<string, string> = {
   "Laser Engravers": "laser-engravers",
 };
 
+const defaultImages: Record<string, string> = {
+  "ai-gadgets": "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=800&h=450&fit=crop",
+  "creator-tools": "https://images.unsplash.com/photo-1593698140817-84ac2185466e?w=800&h=450&fit=crop",
+  "mini-pcs": "https://images.unsplash.com/photo-1587202372775-e229f172b9d7?w=800&h=450&fit=crop",
+  "laser-engravers": "https://images.unsplash.com/photo-1617111506222-7a3fcd7c2f3d?w=800&h=450&fit=crop",
+};
+
 function notionPostToReview(post: NotionPost): Review {
   const catSlug = categorySlugMap[post.category] || post.category.toLowerCase().replace(/\s+/g, "-");
   return {
@@ -183,7 +190,7 @@ function notionPostToReview(post: NotionPost): Review {
     tags: post.tags,
     author: post.author,
     date: post.date,
-    image: `https://images.unsplash.com/photo-1677442136019-21780ecad995?w=800&h=450&fit=crop`,
+    image: post.image || defaultImages[catSlug] || defaultImages["ai-gadgets"],
     rating: post.rating ? post.rating / 2 : 0,
     pros: post.pros,
     cons: post.cons,
@@ -203,7 +210,7 @@ function notionPostToComparison(post: NotionPost): Comparison {
     excerpt: post.excerpt,
     category: catSlug,
     date: post.date,
-    image: `https://images.unsplash.com/photo-1677442136019-21780ecad995?w=800&h=450&fit=crop`,
+    image: post.image || defaultImages[catSlug] || defaultImages["ai-gadgets"],
     readingTime: post.readingTime || undefined,
     products: [],
   };
@@ -217,7 +224,7 @@ function notionPostToBuyingGuide(post: NotionPost): BuyingGuide {
     excerpt: post.excerpt,
     category: catSlug,
     date: post.date,
-    image: `https://images.unsplash.com/photo-1677442136019-21780ecad995?w=800&h=450&fit=crop`,
+    image: post.image || defaultImages[catSlug] || defaultImages["ai-gadgets"],
     productCount: 1,
     readingTime: post.readingTime || undefined,
   };

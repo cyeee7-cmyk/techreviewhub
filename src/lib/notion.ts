@@ -78,6 +78,7 @@ export interface NotionPost {
   pros: string[];
   cons: string[];
   content: string;
+  image: string;
 }
 
 function mapNotionPageToPost(page: NotionPageItem): NotionPost {
@@ -115,6 +116,7 @@ function mapNotionPageToPost(page: NotionPageItem): NotionPost {
     pros: prosRaw ? prosRaw.split("|").map((s: string) => s.trim()).filter(Boolean) : [],
     cons: consRaw ? consRaw.split("|").map((s: string) => s.trim()).filter(Boolean) : [],
     content: "",
+    image: getUrl(props["Image"]),
   };
 }
 
