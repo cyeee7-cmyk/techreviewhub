@@ -7,6 +7,14 @@ const nextConfig: NextConfig = {
         protocol: "https",
         hostname: "images.unsplash.com",
       },
+      {
+        protocol: "https",
+        hostname: "a.impactradius-go.com",
+      },
+      {
+        protocol: "https",
+        hostname: "imp.pxf.io",
+      },
     ],
   },
 };
