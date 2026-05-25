@@ -113,7 +113,7 @@ export default function DealCard({ deal }: { deal: Deal }) {
         <a
           href={deal.affiliateLink}
           target="_blank"
-          rel="noopener noreferrer"
+          rel="sponsored noopener"
           className="flex items-center justify-center gap-2 w-full py-3 bg-green-600 hover:bg-green-700 text-white font-bold rounded-lg transition-colors text-sm"
         >
           Get This Deal
