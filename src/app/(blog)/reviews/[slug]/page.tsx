@@ -140,16 +140,19 @@ export default async function ReviewPage({ params }: Props) {
               </div>
 
               {review.affiliateLink && (
-                <div className="my-12 p-6 bg-blue-50 dark:bg-blue-950 rounded-xl border border-blue-200 dark:border-blue-800">
-                  <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4">
+                <div className="my-12 p-8 bg-gradient-to-r from-blue-600 to-indigo-700 rounded-2xl text-white text-center">
+                  <h3 className="text-2xl font-extrabold mb-3">
                     Ready to Buy?
                   </h3>
-                  <Button asChild size="lg" className="text-lg">
+                  <p className="text-blue-100 mb-6">
+                    Get the best deal directly from the official store
+                  </p>
+                  <Button asChild size="lg" className="bg-white text-blue-700 hover:bg-blue-50 text-lg font-bold px-8">
                     <a href={review.affiliateLink} target="_blank" rel="noopener noreferrer">
-                      Check Price on Amazon
+                      Check Latest Price →
                     </a>
                   </Button>
-                  <p className="text-sm text-gray-500 dark:text-gray-400 mt-3">
+                  <p className="text-sm text-blue-200 mt-4">
                     We may earn a commission if you make a purchase through our link.
                   </p>
                 </div>
@@ -241,6 +244,25 @@ export default async function ReviewPage({ params }: Props) {
                   <ReviewCard key={review.slug} review={review} />
                 ))}
               </div>
+            </div>
+          )}
+
+          {review.affiliateLink && (
+            <div className="mt-16 p-8 md:p-12 bg-gradient-to-r from-green-600 to-emerald-700 rounded-2xl text-white text-center">
+              <h2 className="text-3xl md:text-4xl font-extrabold mb-4">
+                Get Yours Today
+              </h2>
+              <p className="text-lg text-green-100 mb-8 max-w-2xl mx-auto">
+                Don&apos;t miss out — check the latest price and exclusive deals from the official store.
+              </p>
+              <Button asChild size="lg" className="bg-white text-green-700 hover:bg-green-50 text-xl font-bold px-10 py-6">
+                <a href={review.affiliateLink} target="_blank" rel="noopener noreferrer">
+                  Shop Now →
+                </a>
+              </Button>
+              <p className="text-sm text-green-200 mt-4">
+                We may earn a commission if you make a purchase through our link.
+              </p>
             </div>
           )}
         </article>
