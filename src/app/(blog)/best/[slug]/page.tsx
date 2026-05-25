@@ -111,7 +111,7 @@ export default async function BestOfPage({ params }: Props) {
                       </Button>
                       {categoryReviews[0].affiliateLink && (
                         <Button asChild size="lg" variant="secondary">
-                          <a href={categoryReviews[0].affiliateLink} target="_blank" rel="sponsored noopener">
+                          <a href={categoryReviews[0].affiliateLink} rel="sponsored">
                             Check Price
                           </a>
                         </Button>

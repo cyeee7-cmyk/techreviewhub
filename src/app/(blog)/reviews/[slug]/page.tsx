@@ -148,7 +148,7 @@ export default async function ReviewPage({ params }: Props) {
                     Get the best deal directly from the official store
                   </p>
                   <Button asChild size="lg" className="bg-white text-blue-700 hover:bg-blue-50 text-lg font-bold px-8">
-                    <a href={review.affiliateLink} target="_blank" rel="sponsored noopener">
+                    <a href={review.affiliateLink} rel="sponsored">
                       Check Latest Price →
                     </a>
                   </Button>
@@ -208,7 +208,7 @@ export default async function ReviewPage({ params }: Props) {
                   </div>
                   {review.affiliateLink && (
                     <Button asChild className="w-full mt-4">
-                      <a href={review.affiliateLink} target="_blank" rel="sponsored noopener">
+                      <a href={review.affiliateLink} rel="sponsored">
                         Check Price
                       </a>
                     </Button>
@@ -256,7 +256,7 @@ export default async function ReviewPage({ params }: Props) {
                 Don&apos;t miss out — check the latest price and exclusive deals from the official store.
               </p>
               <Button asChild size="lg" className="bg-white text-green-700 hover:bg-green-50 text-xl font-bold px-10 py-6">
-                <a href={review.affiliateLink} target="_blank" rel="sponsored noopener">
+                <a href={review.affiliateLink} rel="sponsored">
                   Shop Now →
                 </a>
               </Button>

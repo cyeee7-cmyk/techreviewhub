@@ -187,7 +187,7 @@ export default async function ComparisonPage({ params }: Props) {
                     </div>
                   </div>
                   <Button asChild className="w-full">
-                    <a href={product.affiliateLink} target="_blank" rel="sponsored noopener">
+                    <a href={product.affiliateLink} rel="sponsored">
                       Check Price <ArrowRight className="ml-2 h-4 w-4" />
                     </a>
                   </Button>
