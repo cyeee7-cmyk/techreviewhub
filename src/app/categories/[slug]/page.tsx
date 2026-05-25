@@ -2,6 +2,7 @@ import { categories, getReviews } from "@/lib/data";
 import ReviewCard from "@/components/sections/ReviewCard";
 import { notFound } from "next/navigation";
 import { constructMetadata } from "@/lib/seo";
+import ImageWithFallback from "@/components/shared/ImageWithFallback";
 import type { Metadata } from "next";
 
 interface Props {
@@ -31,11 +32,12 @@ export default async function CategoryPage({ params }: Props) {
     <div className="py-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="mb-12">
-          <div className="relative rounded-2xl overflow-hidden aspect-[21/9] mb-6">
-            <img
+          <div className="relative rounded-2xl overflow-hidden aspect-[21/9] mb-6 bg-gray-100 dark:bg-gray-700">
+            <ImageWithFallback
               src={category.image}
               alt={category.name}
-              className="w-full h-full object-cover"
+              className="object-cover"
+              fill
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
             <div className="absolute bottom-0 left-0 p-8">

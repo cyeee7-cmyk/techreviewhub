@@ -2,6 +2,7 @@ import Link from 'next/link';
 import { Star, ArrowRight } from 'lucide-react';
 import { Comparison } from '@/lib/types';
 import { categoryNameMap } from '@/lib/data';
+import ImageWithFallback from '@/components/shared/ImageWithFallback';
 
 export default function ComparisonCard({
   comparison,
@@ -11,16 +12,17 @@ export default function ComparisonCard({
   return (
     <Link href={`/comparisons/${comparison.slug}`}>
       <div className="rounded-xl overflow-hidden bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 shadow-sm hover:shadow-lg transition-shadow">
-        <div className="relative aspect-video overflow-hidden">
-          <img
+        <div className="relative aspect-video overflow-hidden bg-gray-100 dark:bg-gray-700">
+          <ImageWithFallback
             src={comparison.image}
             alt={comparison.title}
             className="object-cover"
+            fill
           />
-          <span className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-red-600 text-white text-sm font-bold px-3 py-1 rounded-md">
+          <span className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-red-600 text-white text-sm font-bold px-3 py-1 rounded-md z-10">
             VS
           </span>
-          <span className="absolute top-3 left-3 bg-blue-600 text-white text-xs font-semibold px-2.5 py-1 rounded-md">
+          <span className="absolute top-3 left-3 bg-blue-600 text-white text-xs font-semibold px-2.5 py-1 rounded-md z-10">
             {categoryNameMap[comparison.category] || comparison.category}
           </span>
         </div>

@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import ReviewCard from "@/components/sections/ReviewCard";
 import { constructMetadata, generateJsonLd } from "@/lib/seo";
+import ImageWithFallback from "@/components/shared/ImageWithFallback";
 import type { Metadata } from "next";
 
 interface Props {
@@ -90,11 +91,12 @@ export default async function ReviewPage({ params }: Props) {
             </div>
           </header>
 
-          <div className="mb-12 rounded-2xl overflow-hidden">
-            <img
+          <div className="mb-12 rounded-2xl overflow-hidden relative bg-gray-100 dark:bg-gray-700">
+            <ImageWithFallback
               src={review.image}
               alt={review.title}
-              className="w-full aspect-video object-cover"
+              className="object-cover"
+              fill
             />
           </div>
 

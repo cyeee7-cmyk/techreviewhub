@@ -2,6 +2,7 @@ import Link from 'next/link';
 import { Star, Clock } from 'lucide-react';
 import { Review } from '@/lib/types';
 import { categoryNameMap } from '@/lib/data';
+import ImageWithFallback from '@/components/shared/ImageWithFallback';
 
 export default function FeaturedCard({
   review,
@@ -18,20 +19,21 @@ export default function FeaturedCard({
       <div
         className={`relative ${
           size === 'large' ? 'aspect-[16/9]' : 'aspect-[16/10]'
-        } overflow-hidden`}
+        } overflow-hidden bg-gray-100 dark:bg-gray-700`}
       >
-        <img
+        <ImageWithFallback
           src={review.image}
           alt={review.title}
           className="object-cover group-hover:scale-[1.02] transition-transform duration-300"
+          fill
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
 
-        <span className="absolute top-4 left-4 bg-blue-600 text-white text-xs font-semibold px-2.5 py-1 rounded-md">
+        <span className="absolute top-4 left-4 bg-blue-600 text-white text-xs font-semibold px-2.5 py-1 rounded-md z-10">
           {categoryNameMap[review.category] || review.category}
         </span>
 
-        <div className="absolute bottom-0 left-0 right-0 p-5 space-y-2">
+        <div className="absolute bottom-0 left-0 right-0 p-5 space-y-2 z-10">
           <h3
             className={`font-bold text-white line-clamp-2 ${
               size === 'large' ? 'text-3xl' : 'text-xl'

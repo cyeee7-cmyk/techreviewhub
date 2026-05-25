@@ -2,21 +2,23 @@ import Link from 'next/link';
 import { Clock, ArrowRight, CheckCircle2 } from 'lucide-react';
 import { BuyingGuide } from '@/lib/types';
 import { categoryNameMap } from '@/lib/data';
+import ImageWithFallback from '@/components/shared/ImageWithFallback';
 
 export default function GuideCard({ guide }: { guide: BuyingGuide }) {
   return (
     <Link href={`/best/${guide.category}`}>
       <div className="rounded-xl overflow-hidden bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 shadow-sm hover:shadow-lg transition-shadow">
-        <div className="relative aspect-video overflow-hidden">
-          <img
+        <div className="relative aspect-video overflow-hidden bg-gray-100 dark:bg-gray-700">
+          <ImageWithFallback
             src={guide.image}
             alt={guide.title}
             className="object-cover"
+            fill
           />
-          <span className="absolute top-3 left-3 bg-green-600 text-white text-xs font-semibold px-2.5 py-1 rounded-md">
+          <span className="absolute top-3 left-3 bg-green-600 text-white text-xs font-semibold px-2.5 py-1 rounded-md z-10">
             Buying Guide
           </span>
-          <span className="absolute top-3 left-32 bg-blue-600 text-white text-xs font-semibold px-2.5 py-1 rounded-md">
+          <span className="absolute top-3 left-32 bg-blue-600 text-white text-xs font-semibold px-2.5 py-1 rounded-md z-10">
             {categoryNameMap[guide.category] || guide.category}
           </span>
         </div>

@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import ReviewCard from "@/components/sections/ReviewCard";
 import { constructMetadata } from "@/lib/seo";
+import ImageWithFallback from "@/components/shared/ImageWithFallback";
 import type { Metadata } from "next";
 
 interface Props {
@@ -60,11 +61,12 @@ export default async function ComparisonPage({ params }: Props) {
             </p>
           </header>
 
-          <div className="mb-12 rounded-2xl overflow-hidden">
-            <img
+          <div className="mb-12 rounded-2xl overflow-hidden relative bg-gray-100 dark:bg-gray-700">
+            <ImageWithFallback
               src={comparison.image}
               alt={comparison.title}
-              className="w-full aspect-video object-cover"
+              className="object-cover"
+              fill
             />
           </div>
 
@@ -131,11 +133,12 @@ export default async function ComparisonPage({ params }: Props) {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
             {comparison.products.map((product, i) => (
               <div key={i} className="rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 overflow-hidden">
-                <div className="aspect-video overflow-hidden">
-                  <img
+                <div className="aspect-video overflow-hidden relative bg-gray-100 dark:bg-gray-700">
+                  <ImageWithFallback
                     src={product.image}
                     alt={product.name}
-                    className="w-full h-full object-cover"
+                    className="object-cover"
+                    fill
                   />
                 </div>
                 <div className="p-6">

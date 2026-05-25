@@ -4,6 +4,7 @@ import { Deal } from '@/lib/types';
 import { categoryNameMap } from '@/lib/data';
 import { Clock, Copy, ExternalLink, Flame, Tag, Check } from 'lucide-react';
 import { useState } from 'react';
+import ImageWithFallback from '@/components/shared/ImageWithFallback';
 
 export default function DealCard({ deal }: { deal: Deal }) {
   const [copied, setCopied] = useState(false);
@@ -25,14 +26,15 @@ export default function DealCard({ deal }: { deal: Deal }) {
     <div className="rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 overflow-hidden shadow-sm hover:shadow-lg transition-shadow group">
       <div className="relative">
         <div className="aspect-[4/3] overflow-hidden bg-gray-100 dark:bg-gray-700">
-          <img
+          <ImageWithFallback
             src={deal.image}
             alt={deal.title}
-            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+            className="object-cover group-hover:scale-105 transition-transform duration-300"
+            fill
           />
         </div>
 
-        <div className="absolute top-3 left-3 flex flex-col gap-1.5">
+        <div className="absolute top-3 left-3 flex flex-col gap-1.5 z-10">
           <span className="bg-red-600 text-white text-xs font-bold px-2.5 py-1 rounded-md">
             -{deal.discount}%
           </span>
@@ -43,7 +45,7 @@ export default function DealCard({ deal }: { deal: Deal }) {
           )}
         </div>
 
-        <div className="absolute top-3 right-3">
+        <div className="absolute top-3 right-3 z-10">
           <span className="bg-blue-600 text-white text-xs font-semibold px-2.5 py-1 rounded-md">
             {categoryNameMap[deal.category] || deal.category}
           </span>

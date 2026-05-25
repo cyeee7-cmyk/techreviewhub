@@ -5,6 +5,7 @@ import { Card, CardContent, CardFooter, CardHeader } from '@/components/ui/card'
 import { Review } from '@/lib/types';
 import { Star } from 'lucide-react';
 import { motion } from 'framer-motion';
+import ImageWithFallback from '@/components/shared/ImageWithFallback';
 
 interface ReviewCardProps {
   review: Review;
@@ -18,11 +19,12 @@ export default function ReviewCard({ review }: ReviewCardProps) {
     >
       <Link href={`/reviews/${review.slug}`}>
         <Card className="h-full overflow-hidden hover:shadow-lg transition-shadow">
-          <div className="aspect-video overflow-hidden">
-            <img
+          <div className="relative aspect-video overflow-hidden bg-gray-100 dark:bg-gray-700">
+            <ImageWithFallback
               src={review.image}
               alt={review.title}
-              className="w-full h-full object-cover transition-transform hover:scale-105"
+              className="object-cover transition-transform hover:scale-105"
+              fill
             />
           </div>
           <CardHeader className="pb-2">

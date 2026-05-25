@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import ReviewCard from "@/components/sections/ReviewCard";
 import { constructMetadata } from "@/lib/seo";
+import ImageWithFallback from "@/components/shared/ImageWithFallback";
 import type { Metadata } from "next";
 
 interface Props {
@@ -60,11 +61,12 @@ export default async function BestOfPage({ params }: Props) {
             </p>
           </header>
 
-          <div className="mb-12 rounded-2xl overflow-hidden">
-            <img
+          <div className="mb-12 rounded-2xl overflow-hidden relative bg-gray-100 dark:bg-gray-700">
+            <ImageWithFallback
               src={category.image}
               alt={`Best ${category.name}`}
-              className="w-full aspect-video object-cover"
+              className="object-cover"
+              fill
             />
           </div>
 
@@ -75,11 +77,12 @@ export default async function BestOfPage({ params }: Props) {
               </h2>
               <div className="rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 overflow-hidden">
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 p-8">
-                  <div className="aspect-video rounded-xl overflow-hidden">
-                    <img
+                  <div className="aspect-video rounded-xl overflow-hidden relative bg-gray-100 dark:bg-gray-700">
+                    <ImageWithFallback
                       src={categoryReviews[0].image}
                       alt={categoryReviews[0].title}
-                      className="w-full h-full object-cover"
+                      className="object-cover"
+                      fill
                     />
                   </div>
                   <div className="flex flex-col justify-center">

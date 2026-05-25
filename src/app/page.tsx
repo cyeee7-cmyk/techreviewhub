@@ -13,6 +13,7 @@ import ArticleCard from '@/components/sections/ArticleCard';
 import ComparisonCard from '@/components/sections/ComparisonCard';
 import GuideCard from '@/components/sections/GuideCard';
 import DealCard from '@/components/sections/DealCard';
+import ImageWithFallback from '@/components/shared/ImageWithFallback';
 
 export default async function Home() {
   const reviews = await getReviews();
@@ -149,15 +150,16 @@ export default async function Home() {
                   <Link
                     key={category.id}
                     href={`/categories/${category.id}`}
-                    className="group relative overflow-hidden rounded-xl aspect-[4/3]"
+                    className="group relative overflow-hidden rounded-xl aspect-[4/3] bg-gray-100 dark:bg-gray-700"
                   >
-                    <img
+                    <ImageWithFallback
                       src={category.image}
                       alt={category.name}
-                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                      className="object-cover transition-transform duration-500 group-hover:scale-110"
+                      fill
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent"></div>
-                    <div className="absolute bottom-0 left-0 p-4">
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent z-10"></div>
+                    <div className="absolute bottom-0 left-0 p-4 z-20">
                       <h3 className="text-lg font-bold text-white mb-0.5">{category.name}</h3>
                       <p className="text-sm text-gray-300">{category.articleCount} articles</p>
                     </div>

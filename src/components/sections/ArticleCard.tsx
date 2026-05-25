@@ -5,6 +5,7 @@ import { Star, Clock, ArrowRight } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { Review } from '@/lib/types';
 import { categoryNameMap } from '@/lib/data';
+import ImageWithFallback from '@/components/shared/ImageWithFallback';
 
 export default function ArticleCard({ review }: { review: Review }) {
   return (
@@ -13,13 +14,14 @@ export default function ArticleCard({ review }: { review: Review }) {
         whileHover={{ y: -4 }}
         className="rounded-xl overflow-hidden bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 shadow-sm hover:shadow-lg transition-shadow"
       >
-        <div className="relative aspect-video overflow-hidden">
-          <img
+        <div className="relative aspect-video overflow-hidden bg-gray-100 dark:bg-gray-700">
+          <ImageWithFallback
             src={review.image}
             alt={review.title}
             className="object-cover hover:scale-105 transition duration-300"
+            fill
           />
-          <span className="absolute top-3 left-3 bg-blue-600 text-white text-xs font-semibold px-2.5 py-1 rounded-md">
+          <span className="absolute top-3 left-3 bg-blue-600 text-white text-xs font-semibold px-2.5 py-1 rounded-md z-10">
             {categoryNameMap[review.category] || review.category}
           </span>
         </div>
