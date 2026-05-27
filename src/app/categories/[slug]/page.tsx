@@ -36,7 +36,6 @@ export default async function CategoryPage({ params }: Props) {
             <ImageWithFallback
               src={category.image}
               alt={category.name}
-              className="object-cover"
               fill
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>

@@ -12,7 +12,6 @@ export default function GuideCard({ guide }: { guide: BuyingGuide }) {
           <ImageWithFallback
             src={guide.image}
             alt={guide.title}
-            className="object-cover"
             fill
           />
           <span className="absolute top-3 left-3 bg-green-600 text-white text-xs font-semibold px-2.5 py-1 rounded-md z-10">

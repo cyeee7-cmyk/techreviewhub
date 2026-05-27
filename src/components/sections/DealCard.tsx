@@ -29,7 +29,7 @@ export default function DealCard({ deal }: { deal: Deal }) {
           <ImageWithFallback
             src={deal.image}
             alt={deal.title}
-            className="object-cover group-hover:scale-105 transition-transform duration-300"
+            className="group-hover:scale-105 transition-transform duration-300"
             fill
           />
         </div>

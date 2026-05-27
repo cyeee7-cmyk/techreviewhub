@@ -16,7 +16,6 @@ export default function ComparisonCard({
           <ImageWithFallback
             src={comparison.image}
             alt={comparison.title}
-            className="object-cover"
             fill
           />
           <span className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-red-600 text-white text-sm font-bold px-3 py-1 rounded-md z-10">

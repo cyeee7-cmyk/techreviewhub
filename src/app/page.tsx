@@ -155,7 +155,7 @@ export default async function Home() {
                     <ImageWithFallback
                       src={category.image}
                       alt={category.name}
-                      className="object-cover transition-transform duration-500 group-hover:scale-110"
+                      className="transition-transform duration-500 group-hover:scale-110"
                       fill
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent z-10"></div>

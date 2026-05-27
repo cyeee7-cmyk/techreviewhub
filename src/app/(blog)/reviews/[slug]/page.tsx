@@ -91,11 +91,10 @@ export default async function ReviewPage({ params }: Props) {
             </div>
           </header>
 
-          <div className="mb-12 rounded-2xl overflow-hidden relative bg-gray-100 dark:bg-gray-700">
+          <div className="mb-12 rounded-2xl overflow-hidden relative aspect-video bg-gray-100 dark:bg-gray-700">
             <ImageWithFallback
               src={review.image}
               alt={review.title}
-              className="object-cover"
               fill
             />
           </div>

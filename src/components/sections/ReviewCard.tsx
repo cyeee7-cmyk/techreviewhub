@@ -23,7 +23,7 @@ export default function ReviewCard({ review }: ReviewCardProps) {
             <ImageWithFallback
               src={review.image}
               alt={review.title}
-              className="object-cover transition-transform hover:scale-105"
+              className="transition-transform hover:scale-105"
               fill
             />
           </div>

@@ -61,11 +61,10 @@ export default async function BestOfPage({ params }: Props) {
             </p>
           </header>
 
-          <div className="mb-12 rounded-2xl overflow-hidden relative bg-gray-100 dark:bg-gray-700">
+          <div className="mb-12 rounded-2xl overflow-hidden relative aspect-video bg-gray-100 dark:bg-gray-700">
             <ImageWithFallback
               src={category.image}
               alt={`Best ${category.name}`}
-              className="object-cover"
               fill
             />
           </div>
@@ -81,7 +80,6 @@ export default async function BestOfPage({ params }: Props) {
                     <ImageWithFallback
                       src={categoryReviews[0].image}
                       alt={categoryReviews[0].title}
-                      className="object-cover"
                       fill
                     />
                   </div>

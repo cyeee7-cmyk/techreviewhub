@@ -18,7 +18,7 @@ export default function ArticleCard({ review }: { review: Review }) {
           <ImageWithFallback
             src={review.image}
             alt={review.title}
-            className="object-cover hover:scale-105 transition duration-300"
+            className="hover:scale-105 transition duration-300"
             fill
           />
           <span className="absolute top-3 left-3 bg-blue-600 text-white text-xs font-semibold px-2.5 py-1 rounded-md z-10">

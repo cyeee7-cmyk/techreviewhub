@@ -24,7 +24,7 @@ export default function FeaturedCard({
         <ImageWithFallback
           src={review.image}
           alt={review.title}
-          className="object-cover group-hover:scale-[1.02] transition-transform duration-300"
+          className="group-hover:scale-[1.02] transition-transform duration-300"
           fill
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />

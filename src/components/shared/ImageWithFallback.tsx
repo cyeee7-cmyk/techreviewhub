@@ -27,16 +27,25 @@ export default function ImageWithFallback({
     }
   };
 
+  if (fill) {
+    return (
+      <img
+        src={imgSrc}
+        alt={alt}
+        onError={handleError}
+        loading="lazy"
+        className={`absolute inset-0 w-full h-full object-cover ${className}`}
+      />
+    );
+  }
+
   return (
     <img
       src={imgSrc}
       alt={alt}
-      className={className}
       onError={handleError}
       loading="lazy"
-      {...(fill
-        ? { style: { position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' } }
-        : { width: '100%', height: '100%' })}
+      className={`w-full h-full object-cover ${className}`}
     />
   );
 }

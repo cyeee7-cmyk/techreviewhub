@@ -61,11 +61,10 @@ export default async function ComparisonPage({ params }: Props) {
             </p>
           </header>
 
-          <div className="mb-12 rounded-2xl overflow-hidden relative bg-gray-100 dark:bg-gray-700">
+          <div className="mb-12 rounded-2xl overflow-hidden relative aspect-video bg-gray-100 dark:bg-gray-700">
             <ImageWithFallback
               src={comparison.image}
               alt={comparison.title}
-              className="object-cover"
               fill
             />
           </div>
@@ -137,7 +136,6 @@ export default async function ComparisonPage({ params }: Props) {
                   <ImageWithFallback
                     src={product.image}
                     alt={product.name}
-                    className="object-cover"
                     fill
                   />
                 </div>
