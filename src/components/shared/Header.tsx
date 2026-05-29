@@ -1,7 +1,8 @@
 'use client';
 
 import Link from 'next/link';
-import { Search, Menu, X, Sun, Moon, ChevronDown } from 'lucide-react';
+import { Menu, X, Sun, Moon } from 'lucide-react';
+import AuthNav from '@/components/shared/AuthNav';
 import { Button } from '@/components/ui/button';
 import { useState, useEffect } from 'react';
 
@@ -53,6 +54,7 @@ export default function Header() {
               <Link href="/about" className="hover:text-white transition-colors">About</Link>
               <Link href="/contact" className="hover:text-white transition-colors">Contact</Link>
               <Link href="/categories" className="hover:text-white transition-colors">Sitemap</Link>
+              <Link href="/login" className="hover:text-white transition-colors">Login</Link>
             </div>
           </div>
         </div>
@@ -84,6 +86,7 @@ export default function Header() {
             </div>
 
             <div className="flex items-center gap-2">
+              <AuthNav />
               <Button variant="ghost" size="icon" onClick={toggleTheme} className="h-9 w-9">
                 {isDark ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
               </Button>
@@ -114,6 +117,7 @@ export default function Header() {
                   {link.label}
                 </Link>
               ))}
+              <AuthNav mobile />
             </div>
           </div>
         )}
