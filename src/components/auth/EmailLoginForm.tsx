@@ -85,10 +85,15 @@ export default function EmailLoginForm() {
   }
 
   return (
-    <div className="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm dark:border-gray-800 dark:bg-gray-900 sm:p-8">
-      <div className="mb-6 space-y-2">
-        <h1 className="text-3xl font-bold text-gray-900 dark:text-white">Sign in with email</h1>
-        <p className="text-sm text-gray-600 dark:text-gray-400">
+    <div className="wp-card rounded-[28px] p-6 sm:p-8">
+      <div className="mb-6 space-y-3 border-b border-stone-200 pb-6 dark:border-gray-700">
+        <span className="wp-section-title">
+          {step === "request" ? "Email Verification" : "Confirm Access"}
+        </span>
+        <h2 className="wp-title text-3xl font-bold text-gray-900 dark:text-white">
+          Sign in with email
+        </h2>
+        <p className="text-sm leading-7 text-stone-600 dark:text-gray-400">
           Enter your email and we&apos;ll send you a 6-digit verification code.
         </p>
       </div>
@@ -97,7 +102,7 @@ export default function EmailLoginForm() {
         <div>
           <label
             htmlFor="login-email"
-            className="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-300"
+            className="mb-2 block text-sm font-semibold uppercase tracking-[0.14em] text-stone-600 dark:text-gray-300"
           >
             Email
           </label>
@@ -116,7 +121,7 @@ export default function EmailLoginForm() {
           <div>
             <label
               htmlFor="login-code"
-              className="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-300"
+              className="mb-2 block text-sm font-semibold uppercase tracking-[0.14em] text-stone-600 dark:text-gray-300"
             >
               Verification code
             </label>
@@ -131,7 +136,7 @@ export default function EmailLoginForm() {
             />
             <button
               type="button"
-              className="mt-3 text-sm font-medium text-blue-600 transition-colors hover:text-blue-500 dark:text-blue-400 dark:hover:text-blue-300"
+              className="mt-3 text-sm font-semibold text-amber-700 transition-colors hover:text-amber-600 dark:text-amber-300 dark:hover:text-amber-200"
               onClick={() => {
                 setStep("request");
                 setCode("");
@@ -145,18 +150,18 @@ export default function EmailLoginForm() {
         ) : null}
 
         {error ? (
-          <p className="rounded-md border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700 dark:border-red-900/60 dark:bg-red-950/40 dark:text-red-300">
+          <p className="rounded-2xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700 dark:border-red-900/60 dark:bg-red-950/40 dark:text-red-300">
             {error}
           </p>
         ) : null}
 
         {success ? (
-          <p className="rounded-md border border-green-200 bg-green-50 px-4 py-3 text-sm text-green-700 dark:border-green-900/60 dark:bg-green-950/40 dark:text-green-300">
+          <p className="rounded-2xl border border-green-200 bg-green-50 px-4 py-3 text-sm text-green-700 dark:border-green-900/60 dark:bg-green-950/40 dark:text-green-300">
             {success}
           </p>
         ) : null}
 
-        <Button className="w-full" size="lg" type="submit" disabled={isSubmitting}>
+        <Button className="w-full rounded-full bg-amber-700 hover:bg-amber-800" size="lg" type="submit" disabled={isSubmitting}>
           {isSubmitting
             ? "Please wait..."
             : step === "request"
@@ -166,7 +171,7 @@ export default function EmailLoginForm() {
 
         {step === "verify" ? (
           <Button
-            className="w-full"
+            className="w-full rounded-full border-stone-300 hover:bg-stone-100 dark:border-gray-700 dark:hover:bg-gray-800"
             type="button"
             variant="outline"
             disabled={isSubmitting}
@@ -207,8 +212,11 @@ export default function EmailLoginForm() {
         ) : null}
       </form>
 
-      <p className="mt-6 text-sm text-gray-500 dark:text-gray-400">
-        Need to send a message instead? <Link href="/contact" className="text-blue-600 hover:text-blue-500 dark:text-blue-400 dark:hover:text-blue-300">Go to contact form</Link>
+      <p className="mt-6 text-sm text-stone-500 dark:text-gray-400">
+        Need to send a message instead?{" "}
+        <Link href="/contact" className="font-semibold text-amber-700 hover:text-amber-600 dark:text-amber-300 dark:hover:text-amber-200">
+          Go to contact form
+        </Link>
       </p>
     </div>
   );

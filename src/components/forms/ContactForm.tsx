@@ -71,7 +71,7 @@ export default function ContactForm() {
         <div>
           <label
             htmlFor="name"
-            className="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-300"
+            className="mb-2 block text-sm font-semibold uppercase tracking-[0.14em] text-stone-600 dark:text-gray-300"
           >
             Name
           </label>
@@ -87,7 +87,7 @@ export default function ContactForm() {
         <div>
           <label
             htmlFor="email"
-            className="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-300"
+            className="mb-2 block text-sm font-semibold uppercase tracking-[0.14em] text-stone-600 dark:text-gray-300"
           >
             Email
           </label>
@@ -106,7 +106,7 @@ export default function ContactForm() {
       <div>
         <label
           htmlFor="subject"
-          className="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-300"
+          className="mb-2 block text-sm font-semibold uppercase tracking-[0.14em] text-stone-600 dark:text-gray-300"
         >
           Subject
         </label>
@@ -123,7 +123,7 @@ export default function ContactForm() {
       <div>
         <label
           htmlFor="message"
-          className="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-300"
+          className="mb-2 block text-sm font-semibold uppercase tracking-[0.14em] text-stone-600 dark:text-gray-300"
         >
           Message
         </label>
@@ -139,18 +139,30 @@ export default function ContactForm() {
       </div>
 
       {error ? (
-        <p className="rounded-md border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700 dark:border-red-900/60 dark:bg-red-950/40 dark:text-red-300">
+        <p className="rounded-2xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700 dark:border-red-900/60 dark:bg-red-950/40 dark:text-red-300">
           {error}
         </p>
       ) : null}
 
       {success ? (
-        <p className="rounded-md border border-green-200 bg-green-50 px-4 py-3 text-sm text-green-700 dark:border-green-900/60 dark:bg-green-950/40 dark:text-green-300">
+        <p className="rounded-2xl border border-green-200 bg-green-50 px-4 py-3 text-sm text-green-700 dark:border-green-900/60 dark:bg-green-950/40 dark:text-green-300">
           {success}
         </p>
       ) : null}
 
-      <Button size="lg" className="w-full md:w-auto" type="submit" disabled={isSubmitting}>
+      <div className="rounded-[28px] border border-stone-200 bg-stone-50 p-5 dark:border-gray-700 dark:bg-gray-900/70">
+        <p className="text-sm leading-7 text-stone-600 dark:text-gray-400">
+          We typically respond to editorial inquiries, partnership requests, and product tips
+          within 1-2 business days.
+        </p>
+      </div>
+
+      <Button
+        size="lg"
+        className="w-full rounded-full bg-amber-700 hover:bg-amber-800 md:w-auto"
+        type="submit"
+        disabled={isSubmitting}
+      >
         {isSubmitting ? "Sending..." : "Send Message"}
       </Button>
     </form>

@@ -71,7 +71,7 @@ export default function AuthNav({ mobile = false }: AuthNavProps) {
   if (isLoading) {
     return (
       <div className={mobile ? "pt-2" : "hidden items-center gap-2 lg:flex"}>
-        <span className="text-sm text-gray-500 dark:text-gray-400">Checking session...</span>
+        <span className="text-sm text-stone-500 dark:text-gray-400">Checking session...</span>
       </div>
     );
   }
@@ -79,7 +79,11 @@ export default function AuthNav({ mobile = false }: AuthNavProps) {
   if (!user) {
     return (
       <div className={mobile ? "pt-2" : "hidden items-center gap-2 lg:flex"}>
-        <Button asChild size="sm" className={mobile ? "w-full" : undefined}>
+        <Button
+          asChild
+          size="sm"
+          className={`bg-amber-700 hover:bg-amber-800 ${mobile ? "w-full" : "rounded-full px-5"}`}
+        >
           <Link href="/login">Log In</Link>
         </Button>
       </div>
@@ -91,8 +95,8 @@ export default function AuthNav({ mobile = false }: AuthNavProps) {
       <span
         className={
           mobile
-            ? "block text-sm text-gray-600 dark:text-gray-300"
-            : "max-w-[220px] truncate text-sm text-gray-600 dark:text-gray-300"
+            ? "block text-sm text-stone-600 dark:text-gray-300"
+            : "max-w-[220px] truncate text-sm text-stone-600 dark:text-gray-300"
         }
       >
         {user.email}
@@ -102,7 +106,7 @@ export default function AuthNav({ mobile = false }: AuthNavProps) {
         variant="outline"
         onClick={() => void handleLogout()}
         disabled={isLoggingOut}
-        className={mobile ? "w-full" : undefined}
+        className={mobile ? "w-full rounded-full border-stone-300" : "rounded-full border-stone-300 px-5 dark:border-gray-700"}
       >
         {isLoggingOut ? "Signing out..." : "Log Out"}
       </Button>
