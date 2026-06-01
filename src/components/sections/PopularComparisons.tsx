@@ -9,29 +9,32 @@ interface PopularComparisonsProps {
 
 export default function PopularComparisons({ comparisons }: PopularComparisonsProps) {
   return (
-    <div className="rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 overflow-hidden">
-      <h2 className="font-bold text-lg text-gray-900 dark:text-white px-5 pt-5 pb-3">
-        ⚖️ Popular Comparisons
-      </h2>
+    <div className="wp-widget overflow-hidden rounded-[26px]">
+      <div className="border-b border-stone-200 px-5 pb-4 pt-5 dark:border-gray-700">
+        <p className="wp-section-title">Comparison Archive</p>
+        <h2 className="wp-title mt-2 text-2xl font-bold text-gray-900 dark:text-white">
+          Popular Comparisons
+        </h2>
+      </div>
       <ul>
         {comparisons.map((comparison, index) => (
           <li key={comparison.slug}>
             <Link
               href={`/comparisons/${comparison.slug}`}
-              className="flex items-center gap-3 px-5 py-3 hover:bg-gray-50 dark:hover:bg-gray-700/50 transition-colors group"
+              className="group flex items-center gap-3 px-5 py-4 hover:bg-stone-50 dark:hover:bg-gray-700/50 transition-colors"
             >
               <div className="flex-1 min-w-0">
                 <p className="text-sm font-medium text-gray-900 dark:text-white line-clamp-1">
                   {comparison.products[0]?.name} vs {comparison.products[1]?.name}
                 </p>
-                <span className="inline-block mt-1 px-2 py-0.5 bg-blue-100 dark:bg-blue-900 text-blue-700 dark:text-blue-300 rounded-full text-xs font-medium">
+                <span className="mt-1 inline-block rounded-full bg-stone-100 px-2 py-0.5 text-xs font-medium text-stone-700 dark:bg-gray-800 dark:text-gray-300">
                   {categoryNameMap[comparison.category] || comparison.category}
                 </span>
               </div>
-              <ArrowRight className="h-4 w-4 text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors flex-shrink-0" />
+              <ArrowRight className="h-4 w-4 flex-shrink-0 text-gray-400 transition-colors group-hover:text-amber-700 dark:group-hover:text-amber-300" />
             </Link>
             {index < comparisons.length - 1 && (
-              <div className="border-b border-gray-100 dark:border-gray-700 mx-5" />
+              <div className="mx-5 border-b border-stone-200 dark:border-gray-700" />
             )}
           </li>
         ))}
