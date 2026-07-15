@@ -1,4 +1,5 @@
-import { getReviews } from "@/lib/data";
+import { getReviews, getPostContent } from "@/lib/data";
+import { getPublishedPosts } from "@/lib/notion";
 import { notFound } from "next/navigation";
 import { Star, CheckCircle2, XCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -15,7 +16,7 @@ interface Props {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const reviews = await getReviews();
-  const review = reviews.find((r) => r.slug === slug);
+  let review = reviews.find((r) => r.slug === slug);
   return constructMetadata({
     title: review?.title,
     description: review?.excerpt,
@@ -27,10 +28,21 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function ReviewPage({ params }: Props) {
   const { slug } = await params;
   const reviews = await getReviews();
-  const review = reviews.find((r) => r.slug === slug);
+  let review = reviews.find((r) => r.slug === slug);
 
   if (!review) {
     notFound();
+  }
+
+  if (!review.content || review.content === `<p>${review.excerpt}</p>`) {
+    const notionPosts = await getPublishedPosts();
+    const notionPost = notionPosts.find((p) => p.slug === slug);
+    if (notionPost) {
+      const pageContent = await getPostContent(notionPost.id);
+      if (pageContent) {
+        review = { ...review, content: pageContent };
+      }
+    }
   }
 
   const relatedReviews = reviews.filter((r) => review.relatedPosts.includes(r.slug));

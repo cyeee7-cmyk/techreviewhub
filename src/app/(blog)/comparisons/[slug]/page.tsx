@@ -33,6 +33,8 @@ export default async function ComparisonPage({ params }: Props) {
     notFound();
   }
 
+  const hasProducts = comparison.products && comparison.products.length > 0;
+
   const reviews = await getReviews();
   const relatedReviews = reviews.filter((r) => r.category === comparison.category);
 
@@ -69,6 +71,7 @@ export default async function ComparisonPage({ params }: Props) {
             />
           </div>
 
+          {hasProducts && (
           <div className="mb-16">
             <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-8">
               Side-by-Side Comparison
@@ -128,7 +131,9 @@ export default async function ComparisonPage({ params }: Props) {
               </table>
             </div>
           </div>
+          )}
 
+          {hasProducts && (
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
             {comparison.products.map((product, i) => (
               <div key={i} className="rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 overflow-hidden">
@@ -193,6 +198,7 @@ export default async function ComparisonPage({ params }: Props) {
               </div>
             ))}
           </div>
+          )}
 
           {relatedReviews.length > 0 && (
             <div className="mt-16">

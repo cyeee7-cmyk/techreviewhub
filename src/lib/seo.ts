@@ -18,7 +18,8 @@ export const constructMetadata = ({
     description: description || baseDescription,
     verification: {
       other: {
-        "impact-site-verification": "d4840ece-61ab-419e-90ba-f44c2e47dc47",
+        "impact-site-verification": "3f3b5bc5-5839-40f2-abec-a720cbc312a7",
+        "partnerboostverifycode": "32dc01246faccb7f5b3cad5016dd5033",
       },
     },
     openGraph: {

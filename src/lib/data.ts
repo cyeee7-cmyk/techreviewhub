@@ -3,9 +3,9 @@ import { getPublishedPosts, NotionPost, getPageContent } from "./notion";
 
 export const categories: Category[] = [
   { id: "ai-gadgets", name: "AI Gadgets", description: "Latest AI-powered gadgets and smart devices", image: "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=800&h=450&fit=crop", articleCount: 24 },
-  { id: "creator-tools", name: "Creator Tools", description: "Tools for content creators and streamers", image: "https://images.unsplash.com/photo-1593698140817-84ac2185466e?w=800&h=450&fit=crop", articleCount: 18 },
+  { id: "creator-tools", name: "Creator Tools", description: "Tools for content creators and streamers", image: "https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?w=800&h=450&fit=crop", articleCount: 18 },
   { id: "mini-pcs", name: "Mini PCs", description: "Compact and powerful mini computers", image: "https://images.unsplash.com/photo-1587202372775-e229f172b9d7?w=800&h=450&fit=crop", articleCount: 15 },
-  { id: "laser-engravers", name: "Laser Engravers", description: "Laser cutters and engraving machines", image: "https://images.unsplash.com/photo-1617111506222-7a3fcd7c2f3d?w=800&h=450&fit=crop", articleCount: 12 },
+  { id: "laser-engravers", name: "Laser Engravers", description: "Laser cutters and engraving machines", image: "https://images.unsplash.com/photo-1565193566173-7a0ee3dbe261?w=800&h=450&fit=crop", articleCount: 12 },
 ];
 
 const fallbackReviews: Review[] = [
@@ -40,7 +40,7 @@ const fallbackReviews: Review[] = [
     tags: ["Creators", "Tools", "Streaming"],
     author: "Sarah Kim",
     date: "2025-04-20",
-    image: "https://images.unsplash.com/photo-1593698140817-84ac2185466e?w=800&h=450&fit=crop",
+    image: "https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?w=800&h=450&fit=crop",
     rating: 4.6,
     pros: ["Great value", "Excellent performance"],
     cons: ["Learning curve"],
@@ -82,7 +82,7 @@ const fallbackReviews: Review[] = [
     tags: ["Laser", "Engraving", "DIY"],
     author: "Emma Wilson",
     date: "2025-05-05",
-    image: "https://images.unsplash.com/photo-1617111506222-7a3fcd7c2f3d?w=800&h=450&fit=crop",
+    image: "https://images.unsplash.com/photo-1565193566173-7a0ee3dbe261?w=800&h=450&fit=crop",
     rating: 4.3,
     pros: ["Easy to learn", "Affordable entry point", "Great community"],
     cons: ["Limited power for thick materials"],
@@ -161,8 +161,8 @@ const fallbackComparisons: Comparison[] = [
 const fallbackBuyingGuides: BuyingGuide[] = [
   { slug: "best-ai-gadgets-2025", title: "Best AI Gadgets 2025", excerpt: "Our curated list of the best AI gadgets you can buy right now.", category: "ai-gadgets", date: "2025-05-14", image: "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=800&h=450&fit=crop", productCount: 8, readingTime: 15 },
   { slug: "best-mini-pcs-2025", title: "Best Mini PCs 2025", excerpt: "Compact powerhouses for every budget and need.", category: "mini-pcs", date: "2025-05-10", image: "https://images.unsplash.com/photo-1587202372775-e229f172b9d7?w=800&h=450&fit=crop", productCount: 6, readingTime: 12 },
-  { slug: "best-laser-engravers-2025", title: "Best Laser Engravers 2025", excerpt: "From beginner to pro, the best laser engravers for every skill level.", category: "laser-engravers", date: "2025-05-06", image: "https://images.unsplash.com/photo-1617111506222-7a3fcd7c2f3d?w=800&h=450&fit=crop", productCount: 5, readingTime: 10 },
-  { slug: "best-creator-tools-2025", title: "Best Creator Tools 2025", excerpt: "Level up your content with the best creator tools available.", category: "creator-tools", date: "2025-05-02", image: "https://images.unsplash.com/photo-1593698140817-84ac2185466e?w=800&h=450&fit=crop", productCount: 10, readingTime: 14 },
+  { slug: "best-laser-engravers-2025", title: "Best Laser Engravers 2025", excerpt: "From beginner to pro, the best laser engravers for every skill level.", category: "laser-engravers", date: "2025-05-06", image: "https://images.unsplash.com/photo-1565193566173-7a0ee3dbe261?w=800&h=450&fit=crop", productCount: 5, readingTime: 10 },
+  { slug: "best-creator-tools-2025", title: "Best Creator Tools 2025", excerpt: "Level up your content with the best creator tools available.", category: "creator-tools", date: "2025-05-02", image: "https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?w=800&h=450&fit=crop", productCount: 10, readingTime: 14 },
 ];
 
 const categorySlugMap: Record<string, string> = {
@@ -174,9 +174,9 @@ const categorySlugMap: Record<string, string> = {
 
 const defaultImages: Record<string, string> = {
   "ai-gadgets": "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=800&h=450&fit=crop",
-  "creator-tools": "https://images.unsplash.com/photo-1593698140817-84ac2185466e?w=800&h=450&fit=crop",
+  "creator-tools": "https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?w=800&h=450&fit=crop",
   "mini-pcs": "https://images.unsplash.com/photo-1587202372775-e229f172b9d7?w=800&h=450&fit=crop",
-  "laser-engravers": "https://images.unsplash.com/photo-1617111506222-7a3fcd7c2f3d?w=800&h=450&fit=crop",
+  "laser-engravers": "https://images.unsplash.com/photo-1565193566173-7a0ee3dbe261?w=800&h=450&fit=crop",
 };
 
 function notionPostToReview(post: NotionPost): Review {
@@ -200,6 +200,17 @@ function notionPostToReview(post: NotionPost): Review {
     readingTime: post.readingTime || undefined,
     featured: post.featured,
   };
+}
+
+function enrichRelatedPosts(reviews: Review[]): Review[] {
+  return reviews.map((review) => {
+    if (review.relatedPosts.length > 0) return review;
+    const sameCategory = reviews
+      .filter((r) => r.category === review.category && r.slug !== review.slug)
+      .slice(0, 3)
+      .map((r) => r.slug);
+    return { ...review, relatedPosts: sameCategory };
+  });
 }
 
 function notionPostToComparison(post: NotionPost): Comparison {
@@ -250,37 +261,34 @@ export function clearCache() {
   cachedPosts = null;
 }
 
+function mergeBySlug<T extends { slug: string }>(notionItems: T[], fallbackItems: T[]): T[] {
+  const seen = new Set(notionItems.map((item) => item.slug));
+  return [...notionItems, ...fallbackItems.filter((item) => !seen.has(item.slug))];
+}
+
 export async function getReviews(): Promise<Review[]> {
   const posts = await getNotionPosts();
-  if (posts.length > 0) {
-    const reviewPosts = posts.filter((p) => p.type === "Review");
-    if (reviewPosts.length > 0) {
-      return reviewPosts.map(notionPostToReview);
-    }
-  }
-  return fallbackReviews;
+  const notionReviews = posts
+    .filter((p) => p.type === "Review")
+    .map(notionPostToReview);
+  const merged = mergeBySlug(notionReviews, fallbackReviews);
+  return enrichRelatedPosts(merged);
 }
 
 export async function getComparisons(): Promise<Comparison[]> {
   const posts = await getNotionPosts();
-  if (posts.length > 0) {
-    const comparisonPosts = posts.filter((p) => p.type === "Comparison");
-    if (comparisonPosts.length > 0) {
-      return comparisonPosts.map(notionPostToComparison);
-    }
-  }
-  return fallbackComparisons;
+  const notionComparisons = posts
+    .filter((p) => p.type === "Comparison")
+    .map(notionPostToComparison);
+  return mergeBySlug(notionComparisons, fallbackComparisons);
 }
 
 export async function getBuyingGuides(): Promise<BuyingGuide[]> {
   const posts = await getNotionPosts();
-  if (posts.length > 0) {
-    const guidePosts = posts.filter((p) => p.type === "Buying Guide");
-    if (guidePosts.length > 0) {
-      return guidePosts.map(notionPostToBuyingGuide);
-    }
-  }
-  return fallbackBuyingGuides;
+  const notionGuides = posts
+    .filter((p) => p.type === "Buying Guide")
+    .map(notionPostToBuyingGuide);
+  return mergeBySlug(notionGuides, fallbackBuyingGuides);
 }
 
 export async function getReviewBySlug(slug: string): Promise<Review | undefined> {
@@ -357,7 +365,7 @@ export const deals: Deal[] = [
     title: "xTool S1 40W Laser Engraver",
     description: "40W diode laser engraver with enclosed design. Cuts 10mm wood and 5mm acrylic with ease.",
     category: "laser-engravers",
-    image: "https://images.unsplash.com/photo-1617111506222-7a3fcd7c2f3d?w=400&h=400&fit=crop",
+    image: "https://images.unsplash.com/photo-1565193566173-7a0ee3dbe261?w=400&h=400&fit=crop",
     originalPrice: "$1,199",
     dealPrice: "$899",
     discount: 25,
@@ -406,7 +414,7 @@ export const deals: Deal[] = [
     title: "Elgato Stream Deck MK.2",
     description: "15 customizable LCD keys for streamers. Take control of your streams, apps, and tools.",
     category: "creator-tools",
-    image: "https://images.unsplash.com/photo-1593698140817-84ac2185466e?w=400&h=400&fit=crop",
+    image: "https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?w=400&h=400&fit=crop",
     originalPrice: "$149",
     dealPrice: "$109",
     discount: 27,
@@ -439,7 +447,7 @@ export const deals: Deal[] = [
     title: "Creality Falcon2 40W Laser Engraver",
     description: "40W laser engraver with air assist. Engrave up to 400mm/s on wood, leather, and acrylic.",
     category: "laser-engravers",
-    image: "https://images.unsplash.com/photo-1617111506222-7a3fcd7c2f3d?w=400&h=400&fit=crop",
+    image: "https://images.unsplash.com/photo-1565193566173-7a0ee3dbe261?w=400&h=400&fit=crop",
     originalPrice: "$599",
     dealPrice: "$459",
     discount: 23,

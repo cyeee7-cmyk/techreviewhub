@@ -165,65 +165,53 @@ export async function getPageContent(pageId: string): Promise<string> {
       page_size: 100,
     });
 
-    let content = "";
+    let html = "";
     for (const block of blocks.results as any[]) {
+      const richTextToHtml = (rt: any[]) =>
+        rt?.map((t: any) => {
+          let text = t.plain_text || "";
+          text = text.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+          if (t.annotations?.bold) text = `<strong>${text}</strong>`;
+          if (t.annotations?.italic) text = `<em>${text}</em>`;
+          if (t.annotations?.code) text = `<code>${text}</code>`;
+          if (t.href) text = `<a href="${t.href}" rel="sponsored">${text}</a>`;
+          return text;
+        }).join("") || "";
+
       if (block.type === "paragraph") {
-        const text = block.paragraph?.rich_text
-          ?.map((t: any) => t.plain_text)
-          .join("");
-        if (text) content += text + "\n\n";
+        const text = richTextToHtml(block.paragraph?.rich_text);
+        if (text) html += `<p>${text}</p>`;
       } else if (block.type === "heading_1") {
-        const text = block.heading_1?.rich_text
-          ?.map((t: any) => t.plain_text)
-          .join("");
-        if (text) content += `# ${text}\n\n`;
+        const text = richTextToHtml(block.heading_1?.rich_text);
+        if (text) html += `<h2>${text}</h2>`;
       } else if (block.type === "heading_2") {
-        const text = block.heading_2?.rich_text
-          ?.map((t: any) => t.plain_text)
-          .join("");
-        if (text) content += `## ${text}\n\n`;
+        const text = richTextToHtml(block.heading_2?.rich_text);
+        if (text) html += `<h3>${text}</h3>`;
       } else if (block.type === "heading_3") {
-        const text = block.heading_3?.rich_text
-          ?.map((t: any) => t.plain_text)
-          .join("");
-        if (text) content += `### ${text}\n\n`;
+        const text = richTextToHtml(block.heading_3?.rich_text);
+        if (text) html += `<h4>${text}</h4>`;
       } else if (block.type === "bulleted_list_item") {
-        const text = block.bulleted_list_item?.rich_text
-          ?.map((t: any) => t.plain_text)
-          .join("");
-        if (text) content += `- ${text}\n`;
+        const text = richTextToHtml(block.bulleted_list_item?.rich_text);
+        if (text) html += `<ul><li>${text}</li></ul>`;
       } else if (block.type === "numbered_list_item") {
-        const text = block.numbered_list_item?.rich_text
-          ?.map((t: any) => t.plain_text)
-          .join("");
-        if (text) content += `1. ${text}\n`;
+        const text = richTextToHtml(block.numbered_list_item?.rich_text);
+        if (text) html += `<ol><li>${text}</li></ol>`;
       } else if (block.type === "divider") {
-        content += "---\n\n";
+        html += `<hr/>`;
       } else if (block.type === "quote") {
-        const text = block.quote?.rich_text
-          ?.map((t: any) => t.plain_text)
-          .join("");
-        if (text) content += `> ${text}\n\n`;
+        const text = richTextToHtml(block.quote?.rich_text);
+        if (text) html += `<blockquote>${text}</blockquote>`;
       } else if (block.type === "callout") {
-        const text = block.callout?.rich_text
-          ?.map((t: any) => t.plain_text)
-          .join("");
-        if (text) content += `> 💡 ${text}\n\n`;
-      } else if (block.type === "code") {
-        const text = block.code?.rich_text
-          ?.map((t: any) => t.plain_text)
-          .join("");
-        const lang = block.code?.language || "";
-        if (text) content += `\`\`\`${lang}\n${text}\n\`\`\`\n\n`;
+        const text = richTextToHtml(block.callout?.rich_text);
+        if (text) html += `<div class="callout">${text}</div>`;
       } else if (block.type === "image") {
-        const caption = block.image?.caption
-          ?.map((t: any) => t.plain_text)
-          .join("");
-        if (caption) content += `![${caption}](image)\n\n`;
+        const url = block.image?.file?.url || block.image?.external?.url || "";
+        const caption = block.image?.caption?.map((t: any) => t.plain_text).join("") || "";
+        if (url) html += `<figure><img src="${url}" alt="${caption}" loading="lazy" style="width:100%;border-radius:8px;margin:1rem 0"/><figcaption>${caption}</figcaption></figure>`;
       }
     }
 
-    return content.trim();
+    return html.trim();
   } catch {
     return "";
   }
